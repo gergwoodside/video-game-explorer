@@ -1,7 +1,8 @@
 import React from "react";
 import { Game } from "../hooks/useGames";
-import { Card, CardBody, Heading, Image, Text } from "@chakra-ui/react";
+import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
+import CriticScore from "./CriticScore";
 
 // bring in the Game object as a prop
 interface Props {
@@ -15,11 +16,16 @@ const GameCard = ({ game }: Props) => {
     // so edges were still square, basic CSS
     <Card borderRadius={"10px"} overflow={"hidden"}>
       <Image src={game.background_image} />
-      <CardBody>
-        <Heading fontSize={"2xl"}>{game.name}</Heading>
-        <PlatformIconList
-          platforms={game.parent_platforms.map((p) => p.platform)}
-        />
+      <CardBody padding={3}>
+        <HStack justifyContent={"space-between"}>
+          <PlatformIconList
+            platforms={game.parent_platforms.map((p) => p.platform)}
+          />
+          <CriticScore score={game.metacritic} />
+        </HStack>
+        <Heading marginY={1} fontSize={"2xl"}>
+          {game.name}
+        </Heading>
       </CardBody>
     </Card>
   );
