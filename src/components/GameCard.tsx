@@ -3,6 +3,7 @@ import { Game } from "../hooks/useGames";
 import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
+import getCroppedImageURL from "../services/image-url";
 
 // bring in the Game object as a prop
 interface Props {
@@ -15,7 +16,7 @@ const GameCard = ({ game }: Props) => {
     // overflow because image was larger than card
     // so edges were still square, basic CSS
     <Card borderRadius={"10px"} overflow={"hidden"}>
-      <Image src={game.background_image} />
+      <Image src={getCroppedImageURL(game.background_image)} />
       <CardBody padding={3}>
         <HStack justifyContent={"space-between"}>
           <PlatformIconList
