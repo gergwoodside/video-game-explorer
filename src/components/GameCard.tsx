@@ -15,7 +15,11 @@ const GameCard = ({ game }: Props) => {
     // borderRadius to round out the cards edges
     // overflow because image was larger than card
     // so edges were still square, basic CSS
-    <Card borderRadius={"10px"} overflow={"hidden"}>
+    <Card
+      borderRadius={"10px"}
+      overflow={"hidden"}
+      width={{ sm: "500px", md: "400px", lg: "300px", xl: "200px" }}
+    >
       <Image src={getCroppedImageURL(game.background_image)} />
       <CardBody padding={3}>
         <HStack justifyContent={"space-between"}>
