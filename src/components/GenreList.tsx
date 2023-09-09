@@ -11,9 +11,10 @@ import getCroppedImageURL from "../services/image-url";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, isLoading } = useGenres();
 
   if (isLoading) return <Spinner />;
@@ -29,8 +30,9 @@ const GenreList = ({ onSelectGenre }: Props) => {
               src={getCroppedImageURL(genre.image_background)}
             />
             <Button
+              colorScheme={genre.id === selectedGenre?.id ? "teal" : "normal"}
+              variant={genre.id === selectedGenre?.id ? "solid" : "ghost"}
               onClick={() => onSelectGenre(genre)}
-              variant="link"
               fontSize="lg"
             >
               {genre.name === "Massively Multiplayer" ? "MMORPG" : genre.name}
