@@ -1,36 +1,26 @@
+import { Card, CardBody, Heading, HStack, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { Game } from "../hooks/useGames";
-import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
-import PlatformIconList from "./PlatformIconList";
+import getCroppedImageUrl from "../services/image-url";
 import CriticScore from "./CriticScore";
-import getCroppedImageURL from "../services/image-url";
+import PlatformIconList from "./PlatformIconList";
 
-// bring in the Game object as a prop
 interface Props {
   game: Game;
 }
 
 const GameCard = ({ game }: Props) => {
   return (
-    // borderRadius to round out the cards edges
-    // overflow because image was larger than card
-    // so edges were still square, basic CSS
-    <Card
-      borderRadius={"10px"}
-      overflow={"hidden"}
-      width={{ sm: "500px", md: "400px", lg: "300px", xl: "200px" }}
-    >
-      <Image src={getCroppedImageURL(game.background_image)} />
-      <CardBody padding={3}>
-        <HStack justifyContent={"space-between"}>
+    <Card>
+      <Image src={getCroppedImageUrl(game.background_image)} />
+      <CardBody>
+        <Heading fontSize="2xl">{game.name}</Heading>
+        <HStack justifyContent="space-between">
           <PlatformIconList
             platforms={game.parent_platforms.map((p) => p.platform)}
           />
           <CriticScore score={game.metacritic} />
         </HStack>
-        <Heading marginY={1} fontSize={"2xl"}>
-          {game.name}
-        </Heading>
       </CardBody>
     </Card>
   );
